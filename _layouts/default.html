@@ -1,15 +1,14 @@
----
-layout: compress
----
 <!DOCTYPE html>
-<html lang="en">
+<html>
     {% include head.html %}
-    <body>
-        {% include svg-icons.html %}
-        {% include header-default.html %}
-            <main role="main" class="content">
-                {{ content }}
-            </main>
-        {% include scripts.html %}
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    {% include nav.html %}
+    {% include header.html %}
+    {% include about.html %}
+    {% include download.html %}
+    {% include contact.html %}
+    {% include map.html %}
+    {% include footer.html %}
+    {% include js.html %}
     </body>
 </html>
