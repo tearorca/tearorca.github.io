@@ -1,19 +1,21 @@
 ---
-layout: default
+layout: compress
 ---
-<div class="post-area post">
-    <header>
-        <h1>{{ page.title }}</h1>
-    </header>
-    <hr>
-    <article class="page-content">
-        {{ content }}
-    </article>
-</div>
-<div class="post-area post comment">
-    <!-- 多说评论框 start -->
-    
-    <div class="ds-thread" data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="gaohaoyang.github.io{{ page.url }}"></div>
-    
-    <!-- 多说评论框 end -->
-</div>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  	{% include head.html %}
+    <body>
+    	{% include svg-icons.html %}
+		<header class="page-header">
+			<h1 class="post-title">{{ page.title }}</h1>
+			{% include menu-search.html %}
+		</header>
+        <main>
+		    {{ content }}
+		</main>
+        {% include footer.html %}
+        {% include scripts.html %}
+		
+    </body>
+</html>
