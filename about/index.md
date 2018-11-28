@@ -32,6 +32,6 @@ See a [live version of Moon](https://tearorca.github.io) hosted on GitHub.
 
 ## Getting Started
 
-To learn how to install and use this theme check out the [Setup Guide](https://tearorca.github.io/Moon/moon-theme/) for more information.
+To learn how to install and use this theme check out the [Setup Guide](https://tearorca.github.io/Moon/moon-theme) for more information.
       
-[Install Moon](https://tearorca.github.io/){: .btn}
+[Install Moon](https://tearorca.github.io){: .btn}
