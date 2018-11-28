@@ -63,11 +63,11 @@ github-url:         username
 #hackernews:        username
 
 # Gems
-gems:
-  - jekyll-mentions
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-gist
+#gems:
+ # - jekyll-mentions
+  #- jekyll-feed
+ # - jekyll-sitemap
+ # - jekyll-gist
 
 jekyll-mentions:
     base_url: https://github.com
