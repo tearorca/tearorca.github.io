@@ -1,3 +1,14 @@
+---
+layout: post
+title:  "《0day安全》SafeSEH保护"
+date:   2019-3-25
+categories: 
+excerpt: 
+---
+
+* content
+{:toc}
+
 # **SalfSEH介绍**
 
 ## **简介**
