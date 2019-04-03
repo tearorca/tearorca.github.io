@@ -82,5 +82,28 @@ excerpt:
 
 	5.  快表只有4项，很容易被填满，因此空表也是被频繁使用的。
 
+
+# **实验**
+代码：
+
+	 #include <stdio.h>
+	 #include <windows.h>
+	 void main()
+	 {
+		 HLOCAL h1;
+		 HANDLE hp;
+		 hp = HeapCreate(0,0x1000,0x10000);
+		 __asm int 3
+		 h1 = HeapAlloc(hp,HEAP_ZERO_MEMORY,16);
+	 }
+
+直接运行出错后选择取消进入od调试，现在的eax就是前面HeapCreate的返回地址，也就是创建堆的起始地址。
+![](http://ww1.sinaimg.cn/large/7fb67c86ly1g1pr3vpjrcj213h0nxacu.jpg)
+从3A0000开始包含的信息依次是段表索引，虚表索引，空表使用标识和空表索引区
+![](http://ww1.sinaimg.cn/large/7fb67c86ly1g1pr5hsjycj20y20j5dhi.jpg)
+跟进
+![](http://ww1.sinaimg.cn/large/7fb67c86ly1g1pr720zxhj20gl0ar74z.jpg)
+
+
 # **参考链接**
 具体的实践：http://oldblog.giantbranch.cn/?p=437
