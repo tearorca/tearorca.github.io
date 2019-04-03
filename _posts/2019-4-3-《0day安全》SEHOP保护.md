@@ -1,3 +1,15 @@
+---
+layout: post
+title:  "《0day安全》SEHOP保护"
+date:   2019-4-3
+categories: 
+excerpt: 
+---
+
+* content
+{:toc}
+
+
 # **SEHOP**介绍
 
 S.E.H函数是以单链表的形式存放于栈中的，二在这个链表的末端是程序的默认异常处理，它负责处理前面S.E.H函数都不能处理的异常。这是一个经典的S.H.E链
