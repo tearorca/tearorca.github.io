@@ -30,7 +30,7 @@ excerpt:
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24exufmxfj211a0qujth.jpg>)
 
-2.  利用use命令指定exploit，并用info命令生成关于此exploit的相关信息，包括参数值、漏洞描述、参考资料等信息。
+1.  利用use命令指定exploit，并用info命令生成关于此exploit的相关信息，包括参数值、漏洞描述、参考资料等信息。
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24eznps2fj20qb0qk0vn.jpg>)
 
