@@ -34,13 +34,13 @@ excerpt:
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24eznps2fj20qb0qk0vn.jpg>)
 
-3.  在这里面选择想要的样本，如果是分析漏洞成因，只要选可触发崩溃的PoC岩本，直接通过set命令即可设置target参数值
+5.  在这里面选择想要的样本，如果是分析漏洞成因，只要选可触发崩溃的PoC岩本，直接通过set命令即可设置target参数值
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24f2y3826j20uw0qkjv4.jpg>)
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24f3jl1jyj20m001b3yf.jpg>)
 
-4.  最后直接用exploit命令直接生成测试样本
+6.  最后直接用exploit命令直接生成测试样本
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24f4iw7bvj20kc02qq32.jpg>)
 
