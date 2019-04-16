@@ -30,17 +30,17 @@ excerpt:
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24exufmxfj211a0qujth.jpg>)
 
-1.  利用use命令指定exploit，并用info命令生成关于此exploit的相关信息，包括参数值、漏洞描述、参考资料等信息。
+2.  利用use命令指定exploit，并用info命令生成关于此exploit的相关信息，包括参数值、漏洞描述、参考资料等信息。
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24eznps2fj20qb0qk0vn.jpg>)
 
-1.  在这里面选择想要的样本，如果是分析漏洞成因，只要选可触发崩溃的PoC岩本，直接通过set命令即可设置target参数值
+3.  在这里面选择想要的样本，如果是分析漏洞成因，只要选可触发崩溃的PoC岩本，直接通过set命令即可设置target参数值
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24f2y3826j20uw0qkjv4.jpg>)
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24f3jl1jyj20m001b3yf.jpg>)
 
-1.  最后直接用exploit命令直接生成测试样本
+4.  最后直接用exploit命令直接生成测试样本
 
 ![](<http://ww1.sinaimg.cn/large/7fb67c86ly1g24f4iw7bvj20kc02qq32.jpg>)
 
