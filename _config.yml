@@ -10,6 +10,38 @@ tiled_bg:           false   # Set this true if you want to tile your background 
 locale:             en_US
 url:                https://tearorca.github.io
 
+menu:
+  home:
+    text: HOME
+    url: /
+    icon: home
+  th-list:
+    text: CATEGORIES
+    url: /categories
+    icon: th-list
+  tags:
+    text: TAGS
+    url: /tags
+    icon: tags
+  archives:
+    text: ARCHIVES
+    url: /archives
+    icon: archives
+  #about:
+    #text: ABOUT
+    #url: /about
+    #icon: user
+  demo:
+    text: CUSTOM
+    url: /custom
+    icon: plus-square
+  #github:
+    #url: https://github.com/codefine
+    #target: _blank
+    #icon: github
+  #weibo:
+    #url: http://www.weibo.com/codefine
+    #target: _blank
 # Jekyll
 permalink:          /:title/
 markdown:           kramdown
@@ -79,35 +111,3 @@ visit_counter:
   site_pv: true # 浏览次数
   
 
-menu:
-  home:
-    text: HOME
-    url: /
-    icon: home
-  th-list:
-    text: CATEGORIES
-    url: /categories
-    icon: th-list
-  tags:
-    text: TAGS
-    url: /tags
-    icon: tags
-  archives:
-    text: ARCHIVES
-    url: /archives
-    icon: archives
-  #about:
-    #text: ABOUT
-    #url: /about
-    #icon: user
-  demo:
-    text: CUSTOM
-    url: /custom
-    icon: plus-square
-  #github:
-    #url: https://github.com/codefine
-    #target: _blank
-    #icon: github
-  #weibo:
-    #url: http://www.weibo.com/codefine
-    #target: _blank
