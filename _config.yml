@@ -74,3 +74,40 @@ jekyll-mentions:
 
 # Exclude list
 #exclude: [Gemfile, Gemfile.lock, node_modules, gulpfile.js, package.json, _site, src, vendor, CNAME, Rakefile]
+visit_counter: 
+  site_uv: true # 访客数量
+  site_pv: true # 浏览次数
+  
+
+menu:
+  home:
+    text: HOME
+    url: /
+    icon: home
+  th-list:
+    text: CATEGORIES
+    url: /categories
+    icon: th-list
+  tags:
+    text: TAGS
+    url: /tags
+    icon: tags
+  archives:
+    text: ARCHIVES
+    url: /archives
+    icon: archives
+  #about:
+    #text: ABOUT
+    #url: /about
+    #icon: user
+  demo:
+    text: CUSTOM
+    url: /custom
+    icon: plus-square
+  #github:
+    #url: https://github.com/codefine
+    #target: _blank
+    #icon: github
+  #weibo:
+    #url: http://www.weibo.com/codefine
+    #target: _blank
