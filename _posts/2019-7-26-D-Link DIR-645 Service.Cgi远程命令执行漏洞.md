@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "D-Link DIR-645 Service.Cgi远程命令执行漏洞"
-date:   2019-7-27
+date:   2019-7-26
 categories: 
 excerpt: 
 ---
