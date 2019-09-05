@@ -11,7 +11,9 @@ excerpt:
 
 # **vivetok摄像头栈溢出漏洞**
 
-若图片无法正常显示，请看这篇：https://github.com/tearorca/tearorca.github.io/blob/master/_posts/2019-9-5-vivetok%E6%91%84%E5%83%8F%E5%A4%B4%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E.md
+若图片无法正常显示，请看这篇：
+https://github.com/tearorca/tearorca.github.io/blob/master/_posts/2019-9-5-vivetok%E6%91%84%E5%83%8F%E5%A4%B4%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E.md
+
 	
 
 ## **漏洞介绍**
