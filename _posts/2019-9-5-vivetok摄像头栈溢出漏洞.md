@@ -1,3 +1,14 @@
+---
+layout: post
+title:  "vivetok摄像头栈溢出漏洞"
+date:   2019-9-5
+categories: 
+excerpt: 
+---
+
+* content
+{:toc}
+
 # **vivetok摄像头栈溢出漏洞**
 
 ## **漏洞介绍**
